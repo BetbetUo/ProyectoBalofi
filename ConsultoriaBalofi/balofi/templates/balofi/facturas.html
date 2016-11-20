@@ -1,0 +1,35 @@
+{% load i18n staticfiles %}
+<html>
+<head>
+<title>Balofi</title>
+<link rel="stylesheet" type="text/css" href="{% static 'balofi/css/bootstrap.min.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'balofi/css/bootstrap-theme.min.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'balofi/css/base.css' %}" />
+</head>
+
+<body>
+  <a href={% url 'registration:login' %}>Cerrar sesi&oacute;n</a>
+ <div class="container">
+  <h2 class="form-signin-heading">Balofi</h2>
+ </div>
+ <div class="container">
+    <table>
+	 <tr><td>Emisor</td><td>Receptor</td><td>Fecha</td><td>Subtotal</td><td>IVA</td><td>Total</td><td>Enlaces</td></tr>
+ {% for factura in facturas %}
+	 <tr><td>{{factura.rfcEmisor}}</td>
+	 <td>{{factura.rfcReceptor}}</td>
+	 <td>{{factura.fecha}}</td>
+	 <td>{{factura.subtotal}}</td>
+	 <td>{{factura.IVA}}</td>
+	 <td>{{factura.total}}</td>
+	 <td><a href={% url 'editarFactura' pk=factura.pk rfc=clientes.pk %}><button class="btn btn-lg btn-primary btn-block" type="submit">Editar</button></a></td>
+	  <td><a href={% url 'consultaFactura' pk=factura.pk rfc=clientes.pk %}><button class="btn btn-lg btn-primary btn-block" type="submit">Consultar</button></a></td></tr>
+ {% endfor %}
+ 	<tr><td>Registrar nueva factura:</td><td><a href={% url 'registroFactura' clientes.pk %}>Click aqu&iacute;</a></td></tr>
+  	
+   
+   <tr><td><a href={% url 'consulta' clientes.pk %}><button class="btn btn-lg btn-primary btn-block" type="submit">Regresar</button></a></td><td></td></tr>
+   </table>
+   </div>
+</body>
+</html>

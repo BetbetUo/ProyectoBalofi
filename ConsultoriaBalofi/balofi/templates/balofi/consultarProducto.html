@@ -1,0 +1,39 @@
+{% load i18n staticfiles %}
+<html>
+<head>
+<title>Balofi</title>
+<link rel="stylesheet" type="text/css" href="{% static 'balofi/css/bootstrap.min.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'balofi/css/bootstrap-theme.min.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'balofi/css/base.css' %}" />
+</head>
+
+<body>
+  <a href={% url 'registration:login' %}>Cerrar sesi&oacute;n</a>
+ <div class="container">
+  <h2 class="form-signin-heading">Balofi</h2>
+ </div>
+    <div class="container">
+	 {% for producto in productos %}
+    <table>
+	 <tr><td>Id:</td><td>{{producto.idProducto}}</td></tr>
+	 <tr><td>Nombre:</td><td>{{producto.nombre}}</td></tr>
+	 <tr><td>Marca:</td><td>{{producto.marca}}</td></tr>
+	 <tr><td>Color:</td><td>{{producto.color}}</td></tr>
+	 <tr><td>Tama&ntilde;o:</td><td>{{producto.tamanio}}</td></tr>
+	 <tr><td>N&uacute;mero de Piezas:</td><td>{{producto.numeroDePiezas}}</td></tr>
+	 <tr><td>Caducidad:</td><td>{{producto.caducidad}}</td></tr>
+	 <tr><td>Entrada o Salida:</td>
+	 {% if producto.entradaOSalida == 0 %}
+	  <td>Entrada</td>
+	 {% else %}
+	  <td>Salida</td>
+	 {% endif %}
+	 </tr>
+	 <tr><td>Fecha del Movimiento:</td><td>{{producto.fechaMovimiento}}</td></tr>
+	 <tr><td>Cliente:</td><td>{{producto.cliente}}</td></tr>
+ {% endfor %}
+  	<tr><td><a href={% url 'productos' cliente.pk %}><button class="btn btn-lg btn-primary btn-block" type="submit">Regresar</button></a></td></tr>
+	</table>
+   </div>
+</body>
+</html>

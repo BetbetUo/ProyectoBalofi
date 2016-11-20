@@ -1,0 +1,37 @@
+{% load i18n staticfiles %}
+<html>
+<head>
+<title>Balofi</title>
+<link rel="stylesheet" type="text/css" href="{% static 'balofi/css/bootstrap.min.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'balofi/css/bootstrap-theme.min.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'balofi/css/base.css' %}" />
+</head>
+
+<body>
+ <a href={% url 'registration:login' %}>Cerrar sesi&oacute;n</a>
+ <div class="container">
+  <h2 class="form-signin-heading">Balofi</h2>
+ </div>
+    <div class="container">
+	 {% for cliente in clientes %}
+    <table>
+	 <tr><td>RFC:</td><td>{{cliente.rfc}}</td></tr>
+	 <tr><td>Password:</td><td>{{cliente.password}}</td></tr>
+	 <tr><td>Nombre:</td><td>{{cliente.nombre}}</td></tr>
+	 <tr><td>Apellido Paterno:</td><td>{{cliente.aPaterno}}</td></tr>
+	 <tr><td>Apellido Materno:</td><td>{{cliente.aMaterno}}</td></tr>
+	 <tr><td>Direcci&oacute;n:</td><td>{{cliente.direccion}}</td></tr>
+	 <tr><td>Tel&eacute;fono:</td><td>{{cliente.telefono}}</td></tr>
+	 <tr><td>Correo:</td><td>{{cliente.correo}}</td></tr>
+	 <tr><td>Raz&oacute;n Social:</td><td>{{cliente.razonSocial}}</td></tr>
+	 <tr><td>Giro:</td><td>{{cliente.giro}}</td></tr>
+ 
+  <tr><td>Productos:</td><td><a href={% url 'productos' cliente.pk %}><button  class="btn btn-lg btn-primary btn-block" type="submit">Inventario</button></a></td></tr>
+  <tr><td>Facturas:</td><td><a href={% url 'facturas' cliente.pk %}><button class="btn btn-lg btn-primary btn-block" type="submit">Facturas</button></a></td></tr>
+  	
+   {% endfor %}
+  	<tr><td><a href={% url 'Home' %}><button  class="btn btn-lg btn-primary btn-block" type="submit">Regresar</button></a></td></tr>
+	</table>
+   </div>
+</body>
+</html>

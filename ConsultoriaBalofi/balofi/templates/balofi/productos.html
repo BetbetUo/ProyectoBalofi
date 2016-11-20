@@ -1,0 +1,34 @@
+{% load i18n staticfiles %}
+<html>
+<head>
+<title>Balofi</title>
+<link rel="stylesheet" type="text/css" href="{% static 'balofi/css/bootstrap.min.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'balofi/css/bootstrap-theme.min.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'balofi/css/base.css' %}" />
+</head>
+
+<body>
+  <a href={% url 'registration:login' %}>Cerrar sesi&oacute;n</a>
+ <div class="container">
+  <h2 class="form-signin-heading">Balofi</h2>
+ </div>
+ <div class="container">
+    <table>
+	 <tr><td>Producto / Marca</td><td>Entrada/Salida</td><td>Fecha</td><td>Enlaces</td></tr>
+ {% for producto in productos %}
+	 <tr><td>{{producto.nombre}} / {{producto.marca}}</td>
+	 {% if producto.entradaOSalida == 0 %}
+	   <td>Entrada</td>
+	 {% else %}
+	 	<td>Salida</td>
+	 {% endif %}
+	  <td><a href={% url 'editarProducto' pk=producto.pk rfc=clientes.pk %}><button class="btn btn-lg btn-primary btn-block" type="submit">Editar</button></a></td>
+	  <td><a href={% url 'consultaProducto' pk=producto.pk rfc=clientes.pk %}><button class="btn btn-lg btn-primary btn-block" type="submit">Consultar</button></a></td></tr>
+ {% endfor %}
+ 	<tr><td>Registrar nuevo producto:</td><td><a href={% url 'registroProducto' clientes.pk %}>Click aqu&iacute;</a></td></tr>
+   
+   <tr><td><a href={% url 'consulta' clientes.pk %}><button class="btn btn-lg btn-primary btn-block" type="submit">Regresar</button></a></td></tr>
+   </table>
+   </div>
+</body>
+</html>
